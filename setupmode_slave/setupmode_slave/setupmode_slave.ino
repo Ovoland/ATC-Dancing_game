@@ -142,7 +142,7 @@ void setup() {
 // ============================================
 
 void loop() {
-   read();
+   readSlave();
 }
 
 void enterSetupMode() {
@@ -203,7 +203,7 @@ void assignColor(PlayerColor color) {
   }
 }
 
-PayloadFromMasterStruct  read(){
+PayloadFromMasterStruct  readSlave(){
   PayloadFromMasterStruct payloadFromMaster;
   if (radio.available()) {              // is there a payload? get the pipe number that received it
     uint8_t bytes = radio.getDynamicPayloadSize();  // get the size of the payload
@@ -268,7 +268,7 @@ void print64Hex(uint64_t val) {
 }
 
 
-void sendMessage( PayloadFromSlaveStruct payloadFromSlave) {
+void sendMessageSlave(PayloadFromSlaveStruct payloadFromSlave) {
   radio.stopListening();
   unsigned long start_timer = micros();
   bool report = radio.write(&payloadFromSlave, sizeof(payloadFromSlave));
